@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dumbbell plot comparing tactical gaps (Utility Damage and Flash Assists) between EU and OCE regions.",
+  "data": {
+    "values": [
+      {"Matchup": "Top Tier (World #1 vs OCE #1)", "Region": "EU", "Team": "FaZe Clan", "UD": 28.0, "FA": 0.28},
+      {"Matchup": "Top Tier (World #1 vs OCE #1)", "Region": "OCE", "Team": "FlyQuest", "UD": 21.5, "FA": 0.21},
+      {"Matchup": "Overall Average (Top EU vs Top OCE)", "Region": "EU", "Team": "EU Top 10 Avg", "UD": 24.8, "FA": 0.25},
+      {"Matchup": "Overall Average (Top EU vs Top OCE)", "Region": "OCE", "Team": "OCE Top 10 Avg", "UD": 18.7, "FA": 0.21}
+    ]
+  },
+  "config": {
+    "font": "sans-serif",
+    "axis": {"labelFontSize": 12, "titleFontSize": 14},
+    "title": {"fontSize": 16, "anchor": "start"}
+  },
+  "hconcat": [
+    {
+      "title": "Utility Damage (UD) per Round",
+      "width": 300,
+      "encoding": {
+        "y": {
+          "field": "Matchup",
+          "type": "nominal",
+          "axis": {"title": null, "labelLimit": 300, "labelFontWeight": "bold"}
+        }
+      },
+      "layer": [
+        {
+          "mark": {"type": "rule", "color": "#d3d3d3", "size": 4},
+          "encoding": {
+            "x": {"field": "UD", "type": "quantitative", "aggregate": "min", "scale": {"zero": false, "domain": [15, 30]}},
+            "x2": {"field": "UD", "aggregate": "max"}
+          }
+        },
+        {
+          "mark": {"type": "point", "size": 400, "filled": true, "opacity": 1},
+          "encoding": {
+            "x": {"field": "UD", "type": "quantitative", "title": "Avg. Utility Damage"},
+            "color": {
+              "field": "Region",
+              "type": "nominal",
+              "scale": {"domain": ["EU", "OCE"], "range": ["#1f77b4", "#ff7f0e"]}
+            },
+            "tooltip": [
+              {"field": "Team", "type": "nominal", "title": "Team/Group"},
+              {"field": "UD", "type": "quantitative", "title": "Utility Damage"}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "Flash Assists per Round",
+      "width": 300,
+      "encoding": {
+        "y": {
+          "field": "Matchup",
+          "type": "nominal",
+          "axis": {"labels": false, "title": null, "ticks": false}
+        }
+      },
+      "layer": [
+        {
+          "mark": {"type": "rule", "color": "#d3d3d3", "size": 4},
+          "encoding": {
+            "x": {"field": "FA", "type": "quantitative", "aggregate": "min", "scale": {"zero": false, "domain": [0.15, 0.35]}},
+            "x2": {"field": "FA", "aggregate": "max"}
+          }
+        },
+        {
+          "mark": {"type": "point", "size": 400, "filled": true, "opacity": 1},
+          "encoding": {
+            "x": {"field": "FA", "type": "quantitative", "title": "Avg. Flash Assists"},
+            "color": {"field": "Region", "type": "nominal"},
+            "tooltip": [
+              {"field": "Team", "type": "nominal", "title": "Team/Group"},
+              {"field": "FA", "type": "quantitative", "title": "Flash Assists"}
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {"color": "shared", "y": "shared"}
+  }
+}

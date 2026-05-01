@@ -1,0 +1,49 @@
+Player,Maps,Rounds,K-D Diff,K/D,Rating,Team,Region
+ZywOo,53,1149,437,1.73,1.45,Team Vitality,EU
+donk,45,947,183,1.28,1.34,Team Spirit,CIS
+m0NESY,45,999,229,1.40,1.29,G2 Esports,EU
+flameZ,53,1149,153,1.20,1.25,Team Vitality,EU
+Magnojez,69,1456,135,1.13,1.22,BetBoom,CIS
+insani,42,964,79,1.12,1.20,MIBR,SA
+afro,59,1302,208,1.27,1.20,3DMAX,EU
+kl1m,42,964,184,1.31,1.20,AMKAL,CIS
+KSCERATO,68,1499,199,1.22,1.19,FURIA,SA
+makazze,72,1513,91,1.09,1.18,BLEED,EU
+xKacpersky,67,1470,107,1.11,1.17,ENCE,EU
+Staehr,74,1544,78,1.07,1.16,Astralis,EU
+ropz,53,1149,193,1.30,1.16,FaZe Clan,EU
+sh1ro,45,947,208,1.39,1.16,Team Spirit,CIS
+Rainwaker,59,1302,99,1.12,1.15,Unknown,EU
+luchov,74,1562,91,1.09,1.15,Unknown,SA
+nqz,48,1053,125,1.19,1.15,paiN Gaming,SA
+blameF,45,954,107,1.18,1.14,fnatic,EU
+MaiL09,46,978,100,1.16,1.14,Unknown,EU
+kyousuke,43,959,55,1.08,1.13,Unknown,Asia
+Spinx,55,1164,115,1.16,1.13,Team Vitality,EU
+MATYS,75,1634,111,1.10,1.13,fnatic,EU
+HUASOPEEK,74,1562,81,1.08,1.13,9z Team,SA
+phzy,74,1544,172,1.18,1.13,Unknown,EU
+lauNX,72,1560,80,1.08,1.13,Unknown,EU
+dumau,58,1262,113,1.14,1.13,Legacy,SA
+mizu,43,893,66,1.11,1.12,Unknown,EU
+frozen,45,955,39,1.06,1.12,FaZe Clan,EU
+JDC,43,910,28,1.04,1.12,MOUZ,EU
+jabbi,74,1544,47,1.04,1.12,Astralis,EU
+HeavyGod,75,1634,90,1.09,1.11,Cloud9,CIS
+XANTARES,78,1697,114,1.10,1.11,Eternal Fire,EU
+b1t,72,1513,76,1.08,1.11,Natus Vincere,EU
+Wicadia,78,1697,98,1.08,1.11,Eternal Fire,EU
+NiKo,45,999,55,1.09,1.10,G2 Esports,EU
+Vexite,41,951,146,1.23,1.27,FlyQuest,OCE
+INS,41,951,127,1.20,1.23,FlyQuest,OCE
+nettik,32,728,54,1.11,1.15,FlyQuest,OCE
+jks,33,758,84,1.18,1.13,FlyQuest,OCE
+dexter,51,1109,42,1.06,1.09,Fnatic,OCE
+Liazz,35,738,68,1.16,1.09,Unknown,OCE
+aliStair,35,738,45,1.10,1.09,Unknown,OCE
+story,14,312,33,1.17,1.08,FlyQuest,OCE
+hazr,18,447,-22,0.93,1.01,Unknown,OCE
+BRACE,18,447,-12,0.96,0.98,Unknown,OCE
+Tucks,35,738,-55,0.89,0.93,Unknown,OCE
+apocdud,18,447,-34,0.89,0.91,Unknown,OCE
+motion,18,447,-68,0.77,0.83,Unknown,OCE
