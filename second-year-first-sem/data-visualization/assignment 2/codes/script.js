@@ -1,4 +1,4 @@
-const GRAPH_AMOUNT = 9
+const GRAPH_AMOUNT = 10
 
 for (let i = 1; i < GRAPH_AMOUNT + 1; i++){
     const id = `#graph_${i}`

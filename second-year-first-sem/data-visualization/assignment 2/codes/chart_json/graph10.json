@@ -1,0 +1,212 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Comparison of matches played and performance against Top 20 teams between Europe and Australian regions",
+  "data": {
+    "url": "../data/graph_10/data.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum['K/D Ratio'] === 'N/A' ? null : parseFloat(datum['K/D Ratio'])",
+      "as": "KD_Ratio"
+    },
+    {
+      "calculate": "datum['Win %'] === 'N/A' ? null : parseFloat(datum['Win %'])",
+      "as": "Win_Percent"
+    },
+    {
+      "calculate": "datum['Country'] === 'EU' ? 'European Teams' : 'Australian Teams'",
+      "as": "Region_Class"
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
+  "vconcat": [
+    {
+      "width": 700,
+      "height": 180,
+      "title": {
+        "text": "Drastic Gap in Sample Size",
+        "subtitle": "Total Maps Played against Top 20 teams highlights the 'Physical Isolation' of the Australian region.",
+        "fontSize": 20,
+        "subtitleFontSize": 14,
+        "subtitleColor": "#666",
+        "anchor": "start",
+        "offset": 10
+      },
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "Team",
+          "type": "nominal",
+          "sort": {"field": "Maps Played", "order": "descending"},
+          "axis": {
+            "labelAngle": -45, 
+            "title": null, 
+            "labelFontSize": 12,
+            "labelColor": {
+              "condition": {
+                "test": "datum.value === 'FlyQuest' || datum.value === 'Rooster' || datum.value === 'Mindfreak'",
+                "value": "#cc0000"
+              },
+              "value": "#1d4e89"
+            },
+            "labelFontWeight": "bold"
+          }
+        },
+        "y": {
+          "field": "Maps Played",
+          "type": "quantitative",
+          "title": "Maps Played",
+          "axis": {"titleFontSize": 12}
+        },
+        "color": {
+          "field": "Region_Class",
+          "type": "nominal",
+          "scale": {
+            "domain": ["European Teams", "Australian Teams"],
+            "range": ["#9cbce3", "#cc0000"]
+          },
+          "legend": {
+            "orient": "right",
+            "title": "Region (Maps)"
+          }
+        },
+        "tooltip": [
+          {"field": "Team", "type": "nominal", "title": "Team"},
+          {"field": "Region_Class", "type": "nominal", "title": "Region"},
+          {"field": "Maps Played", "type": "quantitative", "title": "Maps Played"}
+        ]
+      }
+    },
+    {
+      "width": 700,
+      "height": 220,
+      "title": {
+        "text": "Performance Metrics Collapse",
+        "subtitle": "The Win % and K/D Ratio of regional leaders plummet when facing global elite systems (Top 20).",
+        "fontSize": 20,
+        "subtitleFontSize": 14,
+        "subtitleColor": "#666",
+        "anchor": "start",
+        "offset": 10
+      },
+      "resolve": {
+        "scale": {
+          "y": "independent"
+        }
+      },
+      "layer": [
+        {
+          "mark": {"type": "bar", "opacity": 0.9},
+          "encoding": {
+            "x": {
+              "field": "Team",
+              "type": "nominal",
+              "sort": {"field": "Maps Played", "order": "descending"},
+              "axis": {
+                "labelAngle": -45, 
+                "title": "Teams (Ranked by Maps Played)", 
+                "labelFontSize": 12,
+                "labelColor": {
+                  "condition": {
+                    "test": "datum.value === 'FlyQuest' || datum.value === 'Rooster' || datum.value === 'Mindfreak'",
+                    "value": "#cc0000"
+                  },
+                  "value": "#1d4e89"
+                },
+                "labelFontWeight": "bold"
+              }
+            },
+            "y": {
+              "field": "Win_Percent",
+              "type": "quantitative",
+              "title": "Win % (Bar Chart)",
+              "scale": {"domain": [0, 100]},
+              "axis": {"titleColor": "#555", "labelColor": "#555"}
+            },
+            "color": {
+              "field": "Region_Class",
+              "type": "nominal",
+              "scale": {
+                "domain": ["European Teams", "Australian Teams"],
+                "range": ["#9cbce3", "#cc0000"]
+              },
+              "legend": {
+                "title": "Region",
+                "orient": "bottom"
+              }
+            },
+            "tooltip": [
+              {"field": "Team", "type": "nominal", "title": "Team"},
+              {"field": "Region_Class", "type": "nominal", "title": "Region"},
+              {"field": "Win_Percent", "type": "quantitative", "title": "Win %"}
+            ]
+          }
+        },
+        {
+          "encoding": {
+            "x": {
+              "field": "Team",
+              "type": "nominal",
+              "sort": {"field": "Maps Played", "order": "descending"}
+            },
+            "y": {
+              "field": "KD_Ratio",
+              "type": "quantitative",
+              "title": "K/D Ratio (Line & Point)",
+              "scale": {"domain": [0.6, 1.2]},
+              "axis": {
+                "orient": "right",
+                "titleColor": "#8b0000",
+                "labelColor": "#8b0000"
+              }
+            }
+          },
+          "layer": [
+            {
+              "mark": {
+                "type": "line",
+                "color": "#1d4e89",
+                "strokeWidth": 2.5
+              }
+            },
+            {
+              "mark": {
+                "type": "point",
+                "filled": true,
+                "size": 120,
+                "opacity": 1
+              },
+              "encoding": {
+                "color": {
+                  "field": "Region_Class",
+                  "type": "nominal",
+                  "scale": {
+                    "domain": ["European Teams", "Australian Teams"],
+                    "range": ["#1d4e89", "#8b0000"]
+                  },
+                  "legend": null
+                },
+                "tooltip": [
+                  {"field": "Team", "type": "nominal", "title": "Team"},
+                  {"field": "Region_Class", "type": "nominal", "title": "Region"},
+                  {"field": "KD_Ratio", "type": "quantitative", "title": "K/D Ratio"}
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"grid": true, "gridColor": "#f0f0f0"}
+  }
+}
