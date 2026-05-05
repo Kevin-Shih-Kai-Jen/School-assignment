@@ -1,0 +1,146 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Chart 7: The Tactical Gap: Utility Damage & Flash Effectiveness",
+    "subtitle": "Highlighting tactical differences between European and Australian teams.",
+    "anchor": "center",
+    "fontSize": 18,
+    "subtitleFontSize": 14,
+    "subtitleColor": "gray",
+    "offset": 20
+  },
+  "data": {
+    "url": "../data/graph_7/data.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum.Flash_Assists * 100",
+      "as": "Flash_Assists_Scaled"
+    },
+    {
+      "description": "Use Regex to classify EU and Australia",
+      "calculate": "test(/EU|Europe/i, datum.Region) ? 'Europe' : (test(/AU|OCE|Australia/i, datum.Region) ? 'Australia' : 'Other')",
+      "as": "Region_Group"
+    },
+    {
+      "description": "Filter out other regions",
+      "filter": "datum.Region_Group != 'Other'"
+    }
+  ],
+  "spacing": 40,
+  "facet": {
+    "column": {
+      "field": "Region_Group",
+      "type": "nominal",
+      "title": null,
+      "header": {
+        "labelFontSize": 18,
+        "labelFontWeight": "bold",
+        "labelPadding": 15
+      }
+    }
+  },
+  "resolve": {
+    "scale": {
+      "y": "independent"
+    }
+  },
+  "spec": {
+    "width": 300,
+    "height": 400,
+    "encoding": {
+      "y": {
+        "field": "Team",
+        "type": "nominal",
+        "sort": {"field": "UD", "order": "descending"},
+        "title": null,
+        "axis": {
+          "labelFontSize": 13,
+          "ticks": false,
+          "domain": false,
+          "labelPadding": 10
+        }
+      }
+    },
+    "layer": [
+      {
+        "description": "connection line",
+        "mark": {
+          "type": "rule",
+          "size": 2.5
+        },
+        "encoding": {
+          "x": {
+            "field": "UD",
+            "type": "quantitative",
+            "title": "Tactical Metrics",
+            "scale": {"zero": false, "padding": 20},
+            "axis": {
+              "grid": true, 
+              "gridDash": [4, 4],
+              "labelFontSize": 12,
+              "titleFontSize": 13
+            }
+          },
+          "x2": {"field": "Flash_Assists_Scaled"},
+          "color": {
+            "datum": "Tactical Gap (Line)",
+            "scale": {
+              "domain": ["Utility Damage (Solid Red)", "Flash Assists ×100 (Hollow Blue)", "Tactical Gap (Line)"],
+              "range": ["#e74c3c", "#3498db", "#b0b0b0"]
+            },
+            "legend": {
+              "title": "Legend : ",
+              "orient": "bottom",
+              "direction": "horizontal",
+              "titleFontSize": 14,
+              "labelFontSize": 13,
+              "padding": 20,
+              "labelLimit": 0
+            }
+          }
+        }
+      },
+      {
+        "description": "Red dot(Utility Damage)",
+        "mark": {
+          "type": "point",
+          "filled": true,
+          "size": 200,
+          "opacity": 1
+        },
+        "encoding": {
+          "x": {"field": "UD", "type": "quantitative"},
+          "color": {"datum": "Utility Damage (Solid Red)"},
+          "tooltip": [
+            {"field": "Team", "type": "nominal"},
+            {"field": "Region_Group", "type": "nominal", "title": "Region"},
+            {"field": "UD", "type": "quantitative", "title": "Utility Damage (UD)"}
+          ]
+        }
+      },
+      {
+        "description": "Blue empty dot(Flash Assists)",
+        "mark": {
+          "type": "point",
+          "filled": false,
+          "size": 200,
+          "strokeWidth": 3,
+          "opacity": 1
+        },
+        "encoding": {
+          "x": {"field": "Flash_Assists_Scaled", "type": "quantitative"},
+          "color": {"datum": "Flash Assists ×100 (Hollow Blue)"},
+          "tooltip": [
+            {"field": "Team", "type": "nominal"},
+            {"field": "Region_Group", "type": "nominal", "title": "Region"},
+            {"field": "Flash_Assists", "type": "quantitative", "title": "Flash Assists"}
+          ]
+        }
+      }
+    ]
+  }
+}

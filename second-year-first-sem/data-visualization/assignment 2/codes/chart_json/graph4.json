@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 4: Nationality Breakdown of Top 30 Team Players (Waffle Chart)",
+  "title": {
+    "text": "Top 30 Team Players Nationality Breakdown",
+    "subtitle": "Visually demonstrates the stark underrepresentation of Australian players in tier-1 rosters.",
+    "subtitleColor": "gray"
+  },
+  "width": 400,
+  "height": 400,
+  "data": {
+    "url": "../data/graph_4/graph_4.csv"
+  },
+  "transform": [
+    {
+      "window": [{"op": "row_number", "as": "id"}]
+    },
+    {
+      "calculate": "ceil(datum.id / 10)",
+      "as": "row"
+    },
+    {
+      "calculate": "datum.id % 10",
+      "as": "col"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "stroke": "white",
+    "strokeWidth": 2,
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {
+      "field": "col",
+      "type": "ordinal",
+      "axis": null
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "axis": null,
+      "sort": "descending"
+    },
+    "color": {
+      "field": "Region",
+      "type": "nominal",
+      "scale": {
+        "domain": ["OCE", "Asia", "CIS", "EU", "SA"],
+        "range": ["#FF0033", "#E5E7EB", "#D1D5DB", "#E2E8F0", "#F3F4F6"]
+      },
+      "legend": {
+        "title": "Region",
+        "labelFontSize": 12,
+        "titleFontSize": 14
+      }
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "axis": {
+      "domain": false,
+      "ticks": false
+    }
+  }
+}

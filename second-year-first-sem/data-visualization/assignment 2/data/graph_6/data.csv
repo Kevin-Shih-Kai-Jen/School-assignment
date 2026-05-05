@@ -1,42 +1,42 @@
-country,Player_Count,Average_HS
-United States,82,44.14
-Denmark,73,45.94
-Russia,67,45.45
-Brazil,61,43.50
-Sweden,53,45.75
-Poland,50,44.19
-Australia,44,44.62
-China,28,47.95
-France,26,47.28
-Finland,26,43.19
-Germany,25,45.88
-Canada,25,47.17
-Ukraine,24,46.45
-Bulgaria,23,45.61
-Kazakhstan,16,48.24
-Norway,12,49.14
-Thailand,11,44.02
-Serbia,10,43.63
-Hungary,9,41.56
-United Kingdom,9,43.34
-Spain,9,43.69
-Belarus,9,48.19
-Turkey,8,46.05
-Portugal,8,45.04
-Argentina,8,46.26
-New Zealand,7,37.43
-Mongolia,7,48.49
-Slovakia,7,47.74
-Romania,6,45.93
-Lithuania,6,48.78
-Estonia,6,49.90
-Czech Republic,6,46.08
-South Africa,5,45.64
-Belgium,5,46.90
-Latvia,5,50.28
-Singapore,4,45.00
-Korea,4,44.35
-Netherlands,3,39.77
-Kosovo,3,55.67
-Israel,3,46.67
-Indonesia,3,37.13
+country,Player_Count,Average_HS,Longitude,Latitude
+United States,82,44.14,-95.71,37.09
+Denmark,73,45.94,9.5,56.26
+Russia,67,45.45,105.31,61.52
+Brazil,61,43.5,-51.92,-14.23
+Sweden,53,45.75,18.64,60.12
+Poland,50,44.19,19.14,51.91
+Australia,44,44.62,133.77,-25.27
+China,28,47.95,104.19,35.86
+France,26,47.28,2.21,46.22
+Finland,26,43.19,25.74,61.92
+Germany,25,45.88,10.45,51.16
+Canada,25,47.17,-106.34,56.13
+Ukraine,24,46.45,31.16,48.37
+Bulgaria,23,45.61,25.48,42.73
+Kazakhstan,16,48.24,66.92,48.01
+Norway,12,49.14,8.46,60.47
+Thailand,11,44.02,100.99,15.87
+Serbia,10,43.63,21.0,44.01
+Hungary,9,41.56,19.5,47.16
+United Kingdom,9,43.34,-3.43,55.37
+Spain,9,43.69,-3.74,40.46
+Belarus,9,48.19,27.95,53.7
+Turkey,8,46.05,35.24,38.96
+Portugal,8,45.04,-8.22,39.39
+Argentina,8,46.26,-63.61,-38.41
+New Zealand,7,37.43,174.88,-40.9
+Mongolia,7,48.49,103.84,46.86
+Slovakia,7,47.74,19.69,48.66
+Romania,6,45.93,24.96,45.94
+Lithuania,6,48.78,23.88,55.16
+Estonia,6,49.9,25.01,58.59
+Czech Republic,6,46.08,15.47,49.81
+South Africa,5,45.64,22.93,-30.55
+Belgium,5,46.9,4.46,50.5
+Latvia,5,50.28,24.6,56.87
+Singapore,4,45.0,103.81,1.35
+Korea,4,44.35,127.76,35.9
+Netherlands,3,39.77,5.29,52.13
+Kosovo,3,55.67,20.9,42.6
+Israel,3,46.67,34.85,31.04
+Indonesia,3,37.13,113.92,-0.78

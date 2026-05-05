@@ -1,0 +1,43 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Boxplot comparing K/D ratio between OCE and EU regions based on country.",
+  "title": "K/D Ratio Comparison: OCE vs EU Regions",
+  "width": 400,
+  "height": 300,
+  "data": {
+    "url": "../data/graph_5/csgo_players.csv"
+  },
+  "transform": [
+    {
+      "calculate": "indexof(['Australia', 'New Zealand'], datum.country) > -1 ? 'OCE' : (indexof(['France', 'Ukraine', 'Russia', 'United Kingdom', 'Turkey', 'Hungary', 'Denmark', 'Bosnia and Herzegovina', 'Romania', 'Poland', 'Czech Republic', 'Slovakia', 'Estonia', 'Finland', 'Bulgaria', 'Sweden', 'Spain', 'Germany', 'Belarus', 'Belgium', 'Lithuania', 'Serbia', 'Latvia', 'Norway', 'Netherlands', 'Switzerland', 'Kosovo', 'Portugal', 'Montenegro', 'North Macedonia'], datum.country) > -1 ? 'EU' : 'Other')",
+      "as": "region"
+    },
+    {
+      "filter": "datum.region == 'OCE' || datum.region == 'EU'"
+    }
+  ],
+  "mark": {
+    "type": "boxplot",
+    "extent": 1.5
+  },
+  "encoding": {
+    "x": {
+      "field": "region",
+      "type": "nominal",
+      "title": "Region",
+      "axis": {"labelAngle": 0}
+    },
+    "y": {
+      "field": "kills_per_death",
+      "type": "quantitative",
+      "title": "K/D Ratio",
+      "scale": {"zero": false}
+    },
+    "color": {
+      "field": "region",
+      "type": "nominal",
+      "legend": null,
+      "scale": {"range": ["#3498db", "#2ecc71"]}
+    }
+  }
+}

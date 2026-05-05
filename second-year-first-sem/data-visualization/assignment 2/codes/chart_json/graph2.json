@@ -1,0 +1,42 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 300,
+  "title": "S-Tier Tournament Champions by Region",
+  
+  "data": {
+    "url": "../data/graph_2/graph2.csv"
+  },
+  
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  
+  "encoding": {
+    "y": {
+      "field": "Winner",
+      "type": "nominal",
+      "title": "Winning Team",
+      "sort": "-x"
+    },
+    "x": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Number of Wins",
+      "axis": {
+        "tickMinStep": 1
+      }
+    },
+    "color": {
+      "field": "Region",
+      "type": "nominal",
+      "title": "Region"
+    },
+    "tooltip": [
+      {"field": "Winner", "type": "nominal", "title": "Team"},
+      {"field": "Region", "type": "nominal", "title": "Region"},
+      {"aggregate": "count", "type": "quantitative", "title": "Wins"}
+    ]
+  }
+}

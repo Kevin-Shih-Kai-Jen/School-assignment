@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 300,
+  "title": "HLTV Team Ranking Points Over the Past Year",
+  
+  "data": {
+    "url": "../data/graph_3/graph3.csv"
+  },
+  
+  "mark": {
+    "type": "boxplot",
+    "extent": "min-max",
+    "outliers": true
+  },
+  
+  "encoding": {
+    "y": {
+      "field": "Region",
+      "type": "nominal",
+      "title": "Region",
+      "sort": {
+        "op": "median",
+        "field": "Points",
+        "order": "descending"
+      }
+    },
+    "x": {
+      "field": "Points",
+      "type": "quantitative",
+      "title": "Points"
+    },
+    "color": {
+      "field": "Region",
+      "type": "nominal",
+      "title": "Region"
+    }
+  }
+}

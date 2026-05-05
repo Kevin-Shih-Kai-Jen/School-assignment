@@ -1,0 +1,71 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 500,
+  "title": {
+    "text": "Global Precision: Average Headshot Percentage by Country",
+    "subtitle": "Bubble size represents the number of pro players, color intensity represents average headshot percentage."
+  },
+  "projection": {
+    "type": "naturalEarth1"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/world-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e0e0e0",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "../data/graph_6/data.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "#4a4a4a",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "Player_Count",
+          "type": "quantitative",
+          "title": "Pro Players",
+          "scale": {
+            "range": [20, 800]
+          }
+        },
+        "color": {
+          "field": "Average_HS",
+          "type": "quantitative",
+          "title": "Avg Headshot %",
+          "scale": {
+            "scheme": "reds"
+          }
+        },
+        "tooltip": [
+          {"field": "country", "type": "nominal", "title": "Country"},
+          {"field": "Player_Count", "type": "quantitative", "title": "Pro Players"},
+          {"field": "Average_HS", "type": "quantitative", "title": "Avg Headshot %"}
+        ]
+      }
+    }
+  ]
+}
