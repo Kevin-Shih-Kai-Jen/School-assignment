@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "By analyzing real player data from Kaggle (as seen in Chart 9), we can observe that the golden age for global professional players falls between 24 and 26, with over 10% of players remaining active in top-tier tournaments even after age 30 (such as the legendary Danish IGL, karrigan). However, due to the lack of a comprehensive tier-2 league system and stable salary guarantees in the Oceania region, many young players are forced to retire in their early 20s to seek traditional jobs, long before reaching their mechanical peak. This 'gap in age and experience' is another hidden reason why Oceania struggles to cultivate world-class teams.",
-  "width": 600,
+  "width": "container",
   "height": 400,
   "padding": 20,
   "data": {

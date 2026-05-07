@@ -28,7 +28,7 @@
   },
   "vconcat": [
     {
-      "width": 700,
+      "width": "container",
       "height": 180,
       "title": {
         "text": "Drastic Gap in Sample Size",
@@ -85,7 +85,7 @@
       }
     },
     {
-      "width": 700,
+      "width": "container",
       "height": 220,
       "title": {
         "text": "Performance Metrics Collapse",

@@ -6,7 +6,7 @@
     "subtitle": "Visually demonstrates the stark underrepresentation of Australian players in tier-1 rosters.",
     "subtitleColor": "gray"
   },
-  "width": 400,
+  "width": "container",
   "height": 400,
   "data": {
     "url": "../data/graph_4/graph_4.csv"

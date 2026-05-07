@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Boxplot comparing K/D ratio between OCE and EU regions based on country.",
   "title": "K/D Ratio Comparison: OCE vs EU Regions",
-  "width": 400,
+  "width": "container",
   "height": 300,
   "data": {
     "url": "../data/graph_5/csgo_players.csv"

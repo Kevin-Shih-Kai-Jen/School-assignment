@@ -1,0 +1,160 @@
+/* 引入 Google Fonts (Inter字體非常適合現代化、數據驅動的網頁) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+/* 定義全域變數 (CS2 風格的冷色調搭配對比橘/紅色) */
+:root {
+    --bg-color: #f3f4f6;       /* 淺灰背景 */
+    --text-main: #1f2937;      /* 深灰主內文 */
+    --text-muted: #4b5563;     /* 次要文字 */
+    --accent-color: #cc0000;   /* 點綴色 (與你的圖表高光對應) */
+    --card-bg: #ffffff;        /* 圖表卡片背景 */
+}
+
+/* =========================================
+   全域設定 (Global Settings)
+   ========================================= */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.7; /* 提升閱讀體驗 */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* 防止水平滾動 */
+}
+
+/* 限制最大寬度並置中，確保在大螢幕上排版不會過度發散 */
+header, main, footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* =========================================
+   排版層次與字體 (Typography & Hierarchy)
+   ========================================= */
+header {
+    text-align: center;
+    margin-bottom: 4rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 3rem;
+    padding-top: 4rem;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: #111827;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+h3.header {
+    font-size: 1.8rem;
+    color: #111827;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    border-left: 5px solid var(--accent-color);
+    padding-left: 1rem;
+}
+
+#student_details p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0.2rem 0;
+}
+
+#introduction_div p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--text-muted);
+}
+
+/* =========================================
+   圖表與敘事排版 (Scrollytelling Layout)
+   ========================================= */
+.chart-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    
+    /* Figure-ground 處理：卡片化 */
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+}
+
+/* 讓偶數的圖表左右反轉，創造動態的視覺節奏 (Scrollytelling 常見手法) */
+.chart-container:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.graph {
+    flex: 2;
+    min-width: 0; /* 避免 flex 子元素撐破容器 */
+    display: flex;
+    justify-content: center;
+}
+
+.text_block {
+    flex: 1;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+}
+
+.text_block p {
+    margin: 0;
+}
+
+/* =========================================
+   頁尾 (Footer)
+   ========================================= */
+footer {
+    margin-top: 5rem;
+    background-color: #1f2937; /* 深色頁尾區分區塊 */
+    color: #f9fafb;
+    border-radius: 16px 16px 0 0;
+    padding: 3rem 2rem;
+}
+
+footer h3.header {
+    color: #f9fafb;
+    border-left-color: #f87171;
+    margin-top: 0;
+}
+
+#conclusion {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+#acknowledgement p {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin: 0.5rem 0;
+}
+
+/* =========================================
+   響應式設計 (RWD for Laptop/Tablet)
+   ========================================= */
+@media (max-width: 1024px) {
+    .chart-container, .chart-container:nth-child(even) {
+        flex-direction: column; /* 螢幕不夠寬時，改為上下排列 */
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+
+    .text_block {
+        width: 100%;
+        text-align: center;
+    }
+
+    .graph {
+        width: 100%;
+        overflow-x: auto; /* 若 Vega-Lite 設定了固定寬度，允許內部滾動以免撐破版面 */
+    }
+}

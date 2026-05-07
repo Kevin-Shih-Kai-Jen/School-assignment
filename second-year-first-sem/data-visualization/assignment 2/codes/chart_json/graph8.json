@@ -9,9 +9,10 @@
     ],
     "subtitleFontSize": 13,
     "subtitleColor": "#555",
-    "subtitlePadding": 15,
+    "subtitlePadding": 10,
     "anchor": "start",
-    "fontSize": 20
+    "fontSize": 20,
+    "offset": 35
   },
   "data": {
     "url": "../data/graph_8/data.csv"
@@ -42,40 +43,20 @@
     "row": {
       "field": "Region",
       "type": "nominal",
-      "title": "Region",
+      "title": null,
       "header": {
         "labelFontSize": 14,
-        "titleFontSize": 15,
         "labelFontWeight": "bold",
-        "labelAngle": 0
+        "labelAngle": 0,
+        "labelAlign": "right",
+        "labelPadding": 15
       },
       "sort": ["Europe", "Americas", "Asia", "Oceania"]
     }
   },
   "spec": {
     "width": 700,
-    "height": 120, 
-    "encoding": {
-      "x": {
-        "field": "Map",
-        "type": "nominal",
-        "axis": {
-          "labelAngle": 0,
-          "title": "Map",
-          "titleFontSize": 14,
-          "labelFontSize": 12
-        }
-      },
-      "y": {
-        "field": "Team",
-        "type": "nominal",
-        "axis": {
-          "title": null,
-          "labelFontSize": 12
-        },
-        "sort": null
-      }
-    },
+    "height": 150,
     "layer": [
       {
         "mark": {
@@ -83,6 +64,26 @@
           "tooltip": true
         },
         "encoding": {
+          "x": {
+            "field": "Map",
+            "type": "nominal",
+            "axis": {
+              "labelAngle": 0,
+              "title": "Map",
+              "titleFontSize": 14,
+              "labelFontSize": 12,
+              "titlePadding": 10
+            }
+          },
+          "y": {
+            "field": "Team",
+            "type": "nominal",
+            "axis": {
+              "title": null,
+              "labelFontSize": 12
+            },
+            "sort": null
+          },
           "color": {
             "condition": {
               "test": "datum.WinRate === null",
@@ -96,7 +97,8 @@
             },
             "legend": {
               "title": "Win Rate (%)",
-              "titleFontSize": 12
+              "titleFontSize": 12,
+              "offset": 10
             }
           }
         }
@@ -109,6 +111,15 @@
           "fontWeight": "bold"
         },
         "encoding": {
+          "x": {
+            "field": "Map",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "Team",
+            "type": "nominal",
+            "sort": null
+          },
           "text": {
             "field": "WinRateString",
             "type": "nominal"
