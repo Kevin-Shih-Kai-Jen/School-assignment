@@ -2,9 +2,9 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Chart 4: Nationality Breakdown of Top 30 Team Players (Waffle Chart)",
   "title": {
-    "text": "Top 30 Team Players Nationality Breakdown",
-    "subtitle": "Visually demonstrates the stark underrepresentation of Australian players in tier-1 rosters.",
-    "subtitleColor": "gray"
+    "text": "The 1% Problem: Pro Player Origins",
+    "subtitle": "Nationality breakdown of players in Top 30 global teams",
+    "subtitleColor": "#94a3b8"
   },
   "width": "container",
   "height": 400,
@@ -20,49 +20,47 @@
       "as": "row"
     },
     {
-      "calculate": "datum.id % 10",
+      "calculate": "datum.id % 10 == 0 ? 10 : datum.id % 10",
       "as": "col"
     }
   ],
-  "mark": {
-    "type": "rect",
-    "stroke": "white",
-    "strokeWidth": 2,
-    "tooltip": true
-  },
-  "encoding": {
-    "x": {
-      "field": "col",
-      "type": "ordinal",
-      "axis": null
-    },
-    "y": {
-      "field": "row",
-      "type": "ordinal",
-      "axis": null,
-      "sort": "descending"
-    },
-    "color": {
-      "field": "Region",
-      "type": "nominal",
-      "scale": {
-        "domain": ["OCE", "Asia", "CIS", "EU", "SA"],
-        "range": ["#FF0033", "#E5E7EB", "#D1D5DB", "#E2E8F0", "#F3F4F6"]
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#0b0e14",
+        "strokeWidth": 2,
+        "tooltip": true,
+        "cornerRadius": 4
       },
-      "legend": {
-        "title": "Region",
-        "labelFontSize": 12,
-        "titleFontSize": 14
+      "encoding": {
+        "x": {"field": "col", "type": "ordinal", "axis": null},
+        "y": {"field": "row", "type": "ordinal", "axis": null, "sort": "descending"},
+        "color": {
+          "field": "Region",
+          "type": "nominal",
+          "scale": {
+            "domain": ["OCE", "Asia", "CIS", "EU", "SA"],
+            "range": ["#ffae00", "#1e293b", "#334155", "#00bfff", "#475569"]
+          },
+          "legend": {"title": "Region", "orient": "right"}
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "color": "#ffae00",
+        "fontWeight": "bold",
+        "fontSize": 14,
+        "font": "Rajdhani",
+        "align": "left",
+        "baseline": "bottom"
+      },
+      "data": {"values": [{"text": "Oceania: Marginal Representation"}]},
+      "encoding": {
+        "text": {"field": "text"}
       }
     }
-  },
-  "config": {
-    "view": {
-      "stroke": "transparent"
-    },
-    "axis": {
-      "domain": false,
-      "ticks": false
-    }
-  }
+  ]
 }

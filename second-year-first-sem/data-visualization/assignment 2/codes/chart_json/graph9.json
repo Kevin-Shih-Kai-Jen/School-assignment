@@ -26,7 +26,7 @@
       "mark": {
         "type": "area",
         "line": {
-          "color": "#3182bd",
+          "color": "#ffae00",
           "size": 3
         },
         "color": {
@@ -36,8 +36,8 @@
           "y2": 0,
           "gradient": "linear",
           "stops": [
-            {"offset": 0, "color": "white"},
-            {"offset": 1, "color": "#9ecae1"}
+            {"offset": 0, "color": "rgba(255, 174, 0, 0.1)"},
+            {"offset": 1, "color": "rgba(255, 174, 0, 0.6)"}
           ]
         },
         "opacity": 0.8,
@@ -50,6 +50,7 @@
           "title": "Player Percentage (%)",
           "axis": {
             "grid": true,
+            "gridColor": "rgba(255, 255, 255, 0.1)",
             "gridDash": [4, 4]
           }
         }
@@ -68,24 +69,13 @@
           }
         }
       ],
-      "mark": {
-        "type": "point",
-        "opacity": 0
-      },
+      "mark": {"type": "point", "opacity": 0},
       "encoding": {
-        "y": {
-          "field": "Percentage",
-          "type": "quantitative"
-        }
+        "y": {"field": "Percentage", "type": "quantitative"}
       }
     },
     {
-      "mark": {
-        "type": "rule",
-        "color": "gray",
-        "strokeDash": [4, 2],
-        "size": 1.5
-      },
+      "mark": {"type": "rule", "color": "#f1f5f9", "strokeDash": [4, 2], "size": 1},
       "encoding": {
         "opacity": {
           "condition": {"param": "hover", "empty": false, "value": 1},
@@ -101,16 +91,13 @@
     {
       "mark": {
         "type": "circle",
-        "size": 120,
-        "color": "#e6550d",
+        "size": 100,
+        "color": "#00bfff",
         "stroke": "white",
         "strokeWidth": 2
       },
       "encoding": {
-        "y": {
-          "field": "Percentage",
-          "type": "quantitative"
-        },
+        "y": {"field": "Percentage", "type": "quantitative"},
         "opacity": {
           "condition": {"param": "hover", "empty": false, "value": 1},
           "value": 0

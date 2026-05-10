@@ -1,19 +1,12 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Chart 7: The Tactical Gap: Utility Damage & Flash Effectiveness",
-    "subtitle": "Highlighting tactical differences between European and Australian teams.",
-    "anchor": "center",
-    "fontSize": 18,
-    "subtitleFontSize": 14,
-    "subtitleColor": "gray",
-    "offset": 20
+    "text": "The Tactical Efficiency Gap",
+    "subtitle": "EU teams leverage utility damage and flash assists far more effectively than OCE teams.",
+    "subtitleColor": "#94a3b8"
   },
   "data": {
-    "url": "../data/graph_7/data.csv",
-    "format": {
-      "type": "csv"
-    }
+    "url": "../data/graph_7/data.csv"
   },
   "transform": [
     {
@@ -21,35 +14,28 @@
       "as": "Flash_Assists_Scaled"
     },
     {
-      "description": "Use Regex to classify EU and Australia",
       "calculate": "test(/EU|Europe/i, datum.Region) ? 'Europe' : (test(/AU|OCE|Australia/i, datum.Region) ? 'Australia' : 'Other')",
       "as": "Region_Group"
     },
     {
-      "description": "Filter out other regions",
       "filter": "datum.Region_Group != 'Other'"
     }
   ],
-  "spacing": 20,
   "facet": {
     "column": {
       "field": "Region_Group",
       "type": "nominal",
       "title": null,
       "header": {
-        "labelFontSize": 18,
-        "labelFontWeight": "bold",
-        "labelPadding": 15
+        "labelColor": "#ffae00",
+        "labelFont": "Rajdhani",
+        "labelFontSize": 20,
+        "labelPadding": 10
       }
     }
   },
-  "resolve": {
-    "scale": {
-      "y": "independent"
-    }
-  },
   "spec": {
-    "width": 180,
+    "width": 350,
     "height": 400,
     "encoding": {
       "y": {
@@ -58,85 +44,44 @@
         "sort": {"field": "UD", "order": "descending"},
         "title": null,
         "axis": {
-          "labelFontSize": 13,
-          "ticks": false,
-          "domain": false,
-          "labelPadding": 10
+          "labelFontSize": 12,
+          "labelLimit": 150
         }
       }
     },
     "layer": [
       {
-        "description": "connection line",
-        "mark": {
-          "type": "rule",
-          "size": 2.5
-        },
+        "mark": {"type": "rule", "color": "rgba(255, 255, 255, 0.2)", "strokeWidth": 1.5},
         "encoding": {
-          "x": {
-            "field": "UD",
-            "type": "quantitative",
-            "title": "Tactical Metrics",
-            "scale": {"zero": false, "padding": 20},
-            "axis": {
-              "grid": true, 
-              "gridDash": [4, 4],
-              "labelFontSize": 12,
-              "titleFontSize": 13
-            }
-          },
-          "x2": {"field": "Flash_Assists_Scaled"},
-          "color": {
-            "datum": "Tactical Gap (Line)",
-            "scale": {
-              "domain": ["Utility Damage (Solid Red)", "Flash Assists ×100 (Hollow Blue)", "Tactical Gap (Line)"],
-              "range": ["#e74c3c", "#3498db", "#b0b0b0"]
-            },
-            "legend": {
-              "title": "Legend : ",
-              "orient": "bottom",
-              "direction": "horizontal",
-              "titleFontSize": 14,
-              "labelFontSize": 13,
-              "padding": 20,
-              "labelLimit": 0
-            }
-          }
+          "x": {"field": "UD", "type": "quantitative", "title": "Tactical Score"},
+          "x2": {"field": "Flash_Assists_Scaled"}
         }
       },
       {
-        "description": "Red dot(Utility Damage)",
-        "mark": {
-          "type": "point",
-          "filled": true,
-          "size": 200,
-          "opacity": 1
-        },
+        "mark": {"type": "point", "filled": true, "size": 150},
         "encoding": {
           "x": {"field": "UD", "type": "quantitative"},
-          "color": {"datum": "Utility Damage (Solid Red)"},
+          "color": {
+            "datum": "Utility Damage (UD)",
+            "scale": {
+              "domain": ["Utility Damage (UD)", "Flash Assists (Scaled)"],
+              "range": ["#ffae00", "#00bfff"]
+            },
+            "legend": {"orient": "bottom", "title": null}
+          },
           "tooltip": [
             {"field": "Team", "type": "nominal"},
-            {"field": "Region_Group", "type": "nominal", "title": "Region"},
-            {"field": "UD", "type": "quantitative", "title": "Utility Damage (UD)"}
+            {"field": "UD", "type": "quantitative", "title": "UD"}
           ]
         }
       },
       {
-        "description": "Blue empty dot(Flash Assists)",
-        "mark": {
-          "type": "point",
-          "filled": false,
-          "size": 200,
-          "strokeWidth": 3,
-          "opacity": 1
-        },
+        "mark": {"type": "point", "filled": false, "strokeWidth": 2, "size": 150},
         "encoding": {
           "x": {"field": "Flash_Assists_Scaled", "type": "quantitative"},
-          "color": {"datum": "Flash Assists ×100 (Hollow Blue)"},
+          "color": {"datum": "Flash Assists (Scaled)"},
           "tooltip": [
             {"field": "Team", "type": "nominal"},
-            {"field": "Region_Group", "type": "nominal", "title": "Region"},
             {"field": "Flash_Assists", "type": "quantitative", "title": "Flash Assists"}
           ]
         }

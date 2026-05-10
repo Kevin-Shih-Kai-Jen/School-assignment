@@ -1,7 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Boxplot comparing K/D ratio between OCE and EU regions based on country.",
-  "title": "K/D Ratio Comparison: OCE vs EU Regions",
+  "title": {
+    "text": "The Fragging Efficiency Gap",
+    "subtitle": "OCE players show high peak skill but lower overall consistency compared to EU.",
+    "subtitleColor": "#94a3b8"
+  },
   "width": "container",
   "height": 300,
   "data": {
@@ -16,28 +20,55 @@
       "filter": "datum.region == 'OCE' || datum.region == 'EU'"
     }
   ],
-  "mark": {
-    "type": "boxplot",
-    "extent": 1.5
-  },
-  "encoding": {
-    "x": {
-      "field": "region",
-      "type": "nominal",
-      "title": "Region",
-      "axis": {"labelAngle": 0}
+  "layer": [
+    {
+      "mark": {
+        "type": "boxplot",
+        "extent": 1.5,
+        "ticks": true,
+        "outliers": true
+      },
+      "encoding": {
+        "x": {
+          "field": "region",
+          "type": "nominal",
+          "title": "Region",
+          "axis": {"labelAngle": 0}
+        },
+        "y": {
+          "field": "kills_per_death",
+          "type": "quantitative",
+          "title": "K/D Ratio",
+          "scale": {"zero": false}
+        },
+        "color": {
+          "field": "region",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": ["EU", "OCE"],
+            "range": ["#00bfff", "#ffae00"]
+          }
+        }
+      }
     },
-    "y": {
-      "field": "kills_per_death",
-      "type": "quantitative",
-      "title": "K/D Ratio",
-      "scale": {"zero": false}
-    },
-    "color": {
-      "field": "region",
-      "type": "nominal",
-      "legend": null,
-      "scale": {"range": ["#3498db", "#2ecc71"]}
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "dy": -10,
+        "color": "#ffae00",
+        "fontWeight": "bold",
+        "font": "Rajdhani",
+        "fontSize": 14
+      },
+      "transform": [{"filter": "datum.region == 'OCE'"}],
+      "encoding": {
+        "x": {"field": "region", "type": "nominal"},
+        "y": {"aggregate": "median", "field": "kills_per_death", "type": "quantitative"},
+        "text": {"value": "OCE Median"}
+      }
     }
-  }
+  ]
 }

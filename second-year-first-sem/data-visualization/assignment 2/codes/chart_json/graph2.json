@@ -2,41 +2,62 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 300,
-  "title": "S-Tier Tournament Champions by Region",
-  
+  "title": {
+    "text": "The Trophy Gap: S-Tier Champions",
+    "subtitle": "EU dominance is absolute in top-tier competition",
+    "subtitleColor": "#94a3b8"
+  },
   "data": {
     "url": "../data/graph_2/graph2.csv"
   },
-  
-  "mark": {
-    "type": "bar",
-    "tooltip": true
-  },
-  
-  "encoding": {
-    "y": {
-      "field": "Winner",
-      "type": "nominal",
-      "title": "Winning Team",
-      "sort": "-x"
-    },
-    "x": {
-      "aggregate": "count",
-      "type": "quantitative",
-      "title": "Number of Wins",
-      "axis": {
-        "tickMinStep": 1
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4,
+        "tooltip": true
+      },
+      "encoding": {
+        "y": {
+          "field": "Region",
+          "type": "nominal",
+          "title": "Region",
+          "sort": "-x"
+        },
+        "x": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of Wins",
+          "axis": {"tickMinStep": 1}
+        },
+        "color": {
+          "condition": {
+            "test": "datum.Region == 'EU'",
+            "value": "#ffae00"
+          },
+          "value": "#00bfff"
+        }
       }
     },
-    "color": {
-      "field": "Region",
-      "type": "nominal",
-      "title": "Region"
-    },
-    "tooltip": [
-      {"field": "Winner", "type": "nominal", "title": "Team"},
-      {"field": "Region", "type": "nominal", "title": "Region"},
-      {"aggregate": "count", "type": "quantitative", "title": "Wins"}
-    ]
-  }
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 5,
+        "color": "#ffae00",
+        "fontWeight": "bold",
+        "font": "Rajdhani"
+      },
+      "transform": [
+        {"filter": "datum.Region == 'EU'"},
+        {"aggregate": [{"op": "count", "as": "count"}], "groupby": ["Region"]}
+      ],
+      "encoding": {
+        "y": {"field": "Region", "type": "nominal", "sort": "-x"},
+        "x": {"field": "count", "type": "quantitative"},
+        "text": {"value": "EU: The Global Standard"}
+      }
+    }
+  ]
 }

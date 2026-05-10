@@ -1,33 +1,16 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "CS2 Map Pool Depth: European Dominance vs. Oceania Struggles",
-    "subtitle": [
-      "Real data shows top European teams (e.g., Vitality) possess an extremely deep 'Map Pool', maintaining over 80% dominating win rates across 6 different maps.",
-      "Conversely, Oceania teams typically only have 1 to 2 viable maps (specialty maps). This leads to a massive strategic disadvantage during the pre-match",
-      "'Map Veto' phase, where they are easily forced by European teams to compete on maps they are not comfortable with."
-    ],
-    "subtitleFontSize": 13,
-    "subtitleColor": "#555",
-    "subtitlePadding": 10,
-    "anchor": "start",
-    "fontSize": 20,
-    "offset": 35
+    "text": "The Map Pool Chasm",
+    "subtitle": "EU teams possess deep map pools (80%+ win rates across 6+ maps), whereas OCE teams are often limited to 1-2 'specialty' maps.",
+    "subtitleColor": "#94a3b8"
   },
   "data": {
     "url": "../data/graph_8/data.csv"
   },
   "transform": [
     {
-      "fold": [
-        "Dust2",
-        "Mirage",
-        "Inferno",
-        "Nuke",
-        "Overpass",
-        "Ancient",
-        "Anubis"
-      ],
+      "fold": ["Dust2", "Mirage", "Inferno", "Nuke", "Overpass", "Ancient", "Anubis"],
       "as": ["Map", "WinRateString"]
     },
     {
@@ -35,7 +18,7 @@
       "as": "WinRate"
     },
     {
-      "calculate": "datum.Team === 'FlyQuest' || datum.Team === 'Rooster' ? 'Oceania' : datum.Team === 'FURIA' ? 'Americas' : datum.Team === 'The MongolZ' ? 'Asia' : 'Europe'",
+      "calculate": "datum.Team === 'FlyQuest' || datum.Team === 'Rooster' ? 'Oceania' : (datum.Team === 'FURIA' ? 'Americas' : (datum.Team === 'The MongolZ' ? 'Asia' : 'Europe'))",
       "as": "Region"
     }
   ],
@@ -44,111 +27,52 @@
       "field": "Region",
       "type": "nominal",
       "title": null,
-      "header": {
-        "labelFontSize": 14,
-        "labelFontWeight": "bold",
-        "labelAngle": 0,
-        "labelAlign": "right",
-        "labelPadding": 15
-      },
+      "header": {"labelColor": "#ffae00", "labelFont": "Rajdhani", "labelFontSize": 14},
       "sort": ["Europe", "Americas", "Asia", "Oceania"]
     }
   },
   "spec": {
-    "width": 700,
-    "height": 150,
+    "width": "container",
+    "height": 120,
     "layer": [
       {
         "mark": {
-          "type": "rect",
-          "tooltip": true
+          "type": "rect", 
+          "tooltip": true, 
+          "cornerRadius": 6, 
+          "stroke": "#0b0e14", 
+          "strokeWidth": 2
         },
         "encoding": {
-          "x": {
-            "field": "Map",
-            "type": "nominal",
-            "axis": {
-              "labelAngle": 0,
-              "title": "Map",
-              "titleFontSize": 14,
-              "labelFontSize": 12,
-              "titlePadding": 10
-            }
-          },
-          "y": {
-            "field": "Team",
-            "type": "nominal",
-            "axis": {
-              "title": null,
-              "labelFontSize": 12
-            },
-            "sort": null
-          },
+          "x": {"field": "Map", "type": "nominal", "axis": {"labelAngle": 0}},
+          "y": {"field": "Team", "type": "nominal", "title": null},
           "color": {
-            "condition": {
-              "test": "datum.WinRate === null",
-              "value": "#f0f0f0"
-            },
             "field": "WinRate",
             "type": "quantitative",
-            "scale": {
-              "scheme": "blues",
-              "domain": [0, 100]
-            },
-            "legend": {
-              "title": "Win Rate (%)",
-              "titleFontSize": 12,
-              "offset": 10
-            }
+            "scale": {"scheme": "magma", "domain": [0, 100]},
+            "legend": {"title": "Win %"}
           }
         }
       },
       {
         "mark": {
-          "type": "text",
-          "baseline": "middle",
-          "fontSize": 12,
-          "fontWeight": "bold"
+          "type": "text", 
+          "baseline": "middle", 
+          "fontSize": 11, 
+          "fontWeight": "bold", 
+          "font": "Roboto Mono"
         },
         "encoding": {
-          "x": {
-            "field": "Map",
-            "type": "nominal"
-          },
-          "y": {
-            "field": "Team",
-            "type": "nominal",
-            "sort": null
-          },
-          "text": {
-            "field": "WinRateString",
-            "type": "nominal"
-          },
+          "x": {"field": "Map", "type": "nominal"},
+          "y": {"field": "Team", "type": "nominal"},
+          "text": {"field": "WinRate", "type": "quantitative", "format": ".0f"},
           "color": {
-            "condition": [
-              {
-                "test": "datum.WinRate === null",
-                "value": "#999"
-              },
-              {
-                "test": "datum.WinRate < 55",
-                "value": "black"
-              }
-            ],
+            "condition": {"test": "datum.WinRate > 60", "value": "black"},
             "value": "white"
           }
         }
       }
     ]
   },
-  "resolve": {
-    "scale": {
-      "y": "independent"
-    }
-  },
-  "config": {
-    "view": {
-      "stroke": "transparent"
-    }
-  }
+  "resolve": {"scale": {"y": "independent"}}
 }

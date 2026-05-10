@@ -1,160 +1,222 @@
-/* 引入 Google Fonts (Inter字體非常適合現代化、數據驅動的網頁) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+/* 引入 Google Fonts: Rajdhani (電競風格), Inter (現代感), Roboto Mono (數據感) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
 
-/* 定義全域變數 (CS2 風格的冷色調搭配對比橘/紅色) */
+/* 定義進階色彩與變數 - Esports Dark Mode */
 :root {
-    --bg-color: #f3f4f6;       /* 淺灰背景 */
-    --text-main: #1f2937;      /* 深灰主內文 */
-    --text-muted: #4b5563;     /* 次要文字 */
-    --accent-color: #cc0000;   /* 點綴色 (與你的圖表高光對應) */
-    --card-bg: #ffffff;        /* 圖表卡片背景 */
+    --bg-dark: #0b0e14;        /* 深色背景 */
+    --bg-card: rgba(255, 255, 255, 0.03); /* 透明卡片背景 */
+    --text-primary: #f1f5f9;   /* 主文字 */
+    --text-secondary: #94a3b8; /* 次要文字 */
+    --accent-gold: #ffae00;    /* CS2 高光金 */
+    --accent-blue: #00bfff;    /* CS2 點綴藍 */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --glass-blur: blur(12px);
+    --max-width: 1200px;
 }
 
 /* =========================================
-   全域設定 (Global Settings)
+   全域基礎設定 (Global Foundations)
    ========================================= */
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    line-height: 1.7; /* 提升閱讀體驗 */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* 防止水平滾動 */
+    overflow-x: hidden;
+    background: radial-gradient(circle at 50% 0%, #1a1f2e 0%, #0b0e14 100%);
+    background-attachment: fixed;
 }
 
-/* 限制最大寬度並置中，確保在大螢幕上排版不會過度發散 */
 header, main, footer {
-    max-width: 1200px;
+    width: 100%;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 1.5rem;
 }
 
 /* =========================================
-   排版層次與字體 (Typography & Hierarchy)
+   進階字體排印 (Typography)
    ========================================= */
-header {
-    text-align: center;
-    margin-bottom: 4rem;
-    border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 3rem;
-    padding-top: 4rem;
+h1, h2, h3, .header {
+    font-family: 'Rajdhani', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
 }
 
 h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
     font-weight: 700;
-    font-size: 2.8rem;
-    color: #111827;
-    margin-bottom: 1rem;
-    line-height: 1.2;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+h1 span {
+    color: var(--accent-gold);
 }
 
 h3.header {
-    font-size: 1.8rem;
-    color: #111827;
-    margin-top: 4rem;
-    margin-bottom: 2rem;
-    border-left: 5px solid var(--accent-color);
-    padding-left: 1rem;
-}
-
-#student_details p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin: 0.2rem 0;
-}
-
-#introduction_div p {
-    font-size: 1.2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    color: var(--text-muted);
+    font-size: 1.6rem;
+    color: var(--accent-gold);
+    border-bottom: 2px solid var(--accent-gold);
+    display: inline-block;
+    padding-bottom: 0.2rem;
+    margin-bottom: 3rem;
+    margin-top: 10rem;
 }
 
 /* =========================================
-   圖表與敘事排版 (Scrollytelling Layout)
+   視覺層次 (Visual Hierarchy & Layout)
    ========================================= */
-.chart-container {
+header {
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    gap: 3rem;
-    margin-bottom: 4rem;
-    
-    /* Figure-ground 處理：卡片化 */
-    background-color: var(--card-bg);
-    padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    text-align: center;
+    position: relative;
+    padding: 4rem 0;
 }
 
-/* 讓偶數的圖表左右反轉，創造動態的視覺節奏 (Scrollytelling 常見手法) */
+#student_details {
+    position: absolute;
+    top: 2rem;
+    left: 1.5rem;
+    text-align: left;
+}
+
+#student_details p {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8rem;
+    margin: 0;
+    color: var(--accent-blue);
+}
+
+#introduction_div {
+    max-width: 900px;
+}
+
+#introduction_div p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+/* Scrollytelling 容器強化 */
+.chart-container {
+    display: flex;
+    flex-wrap: wrap; /* 應對窄螢幕 */
+    align-items: flex-start;
+    gap: 3rem;
+    margin-bottom: 8rem;
+    padding: 3.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    backdrop-filter: var(--glass-blur);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
 .chart-container:nth-child(even) {
     flex-direction: row-reverse;
 }
 
 .graph {
-    flex: 2;
-    min-width: 0; /* 避免 flex 子元素撐破容器 */
-    display: flex;
-    justify-content: center;
+    flex: 1.8; /* 圖表佔比 */
+    min-width: 300px;
+    width: 100%;
+    overflow: hidden; /* 防止內部溢出 */
 }
 
 .text_block {
-    flex: 1;
-    font-size: 1.15rem;
-    color: var(--text-muted);
+    flex: 1; /* 文字佔比 */
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .text_block p {
-    margin: 0;
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.text_block strong {
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+/* Vega Embed 強制 100% 寬度 */
+.vega-embed {
+    width: 100% !important;
+}
+
+canvas {
+    max-width: 100% !important;
 }
 
 /* =========================================
    頁尾 (Footer)
    ========================================= */
 footer {
-    margin-top: 5rem;
-    background-color: #1f2937; /* 深色頁尾區分區塊 */
-    color: #f9fafb;
-    border-radius: 16px 16px 0 0;
-    padding: 3rem 2rem;
-}
-
-footer h3.header {
-    color: #f9fafb;
-    border-left-color: #f87171;
-    margin-top: 0;
+    padding: 8rem 1.5rem 6rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 8rem;
 }
 
 #conclusion {
-    font-size: 1.1rem;
-    margin-bottom: 3rem;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 5rem;
+}
+
+#conclusion p {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+#acknowledgement {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 3rem;
 }
 
 #acknowledgement p {
     font-size: 0.9rem;
-    color: #9ca3af;
-    margin: 0.5rem 0;
+    color: var(--text-secondary);
 }
 
 /* =========================================
-   響應式設計 (RWD for Laptop/Tablet)
+   響應式設計 (Responsive Design)
    ========================================= */
 @media (max-width: 1024px) {
-    .chart-container, .chart-container:nth-child(even) {
-        flex-direction: column; /* 螢幕不夠寬時，改為上下排列 */
+    .chart-container {
+        padding: 2.5rem;
         gap: 2rem;
-        padding: 1.5rem;
     }
+    
+    .graph, .text_block {
+        flex: 1 1 100%; /* 垂直排列 */
+    }
+}
 
-    .text_block {
-        width: 100%;
-        text-align: center;
-    }
-
-    .graph {
-        width: 100%;
-        overflow-x: auto; /* 若 Vega-Lite 設定了固定寬度，允許內部滾動以免撐破版面 */
-    }
+/* 自定義 Vega Tooltip 樣式 */
+#vg-tooltip-element {
+    background: #1a1f2e !important;
+    color: #f1f5f9 !important;
+    border: 1px solid var(--accent-gold) !important;
+    font-family: 'Inter', sans-serif !important;
+    border-radius: 8px !important;
 }
