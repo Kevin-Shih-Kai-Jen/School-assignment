@@ -29,6 +29,7 @@
   },
   "vconcat": [
     {
+      "width": "container",
       "height": 180,
       "title": {
         "text": "The Physical Isolation Gap",
@@ -79,6 +80,7 @@
       }
     },
     {
+      "width": "container",
       "height": 220,
       "title": {
         "text": "The Strategic Collapse",

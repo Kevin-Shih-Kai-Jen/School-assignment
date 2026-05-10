@@ -227,3 +227,23 @@ footer {
     font-family: 'Inter', sans-serif !important;
     border-radius: 8px !important;
 }
+
+/* =========================================
+   修正 Footer 與最後一張圖表的留白 (Fix Spacing Gap)
+========================================= */
+
+/* 🌟 1. 消除最後一張圖表下方自帶的 8rem 巨大推擠 */
+.chart-container:last-of-type {
+    margin-bottom: 2rem;
+}
+
+/* 🌟 2. 大幅縮小 footer 的上下間距 (原本上方 padding/margin 各高達 8rem) */
+footer {
+    padding-top: 4rem !important;   
+    margin-top: 2rem !important;    
+}
+
+/* 🌟 3. 專門針對 footer 內的標題，消除其高達 10rem 的預設頂部間距 */
+footer h3.header {
+    margin-top: 1rem;
+}
