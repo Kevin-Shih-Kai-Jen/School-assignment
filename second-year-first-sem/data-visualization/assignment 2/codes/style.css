@@ -130,10 +130,16 @@ header {
 }
 
 .graph {
-    flex: 1.8; /* 圖表佔比 */
+    flex: 1.8; 
     min-width: 300px;
     width: 100%;
-    overflow: hidden; /* 防止內部溢出 */
+    
+    /* 🚨 加上最小高度，確保在圖表運算前 flex 容器不會塌陷 */
+    min-height: 400px; 
+    
+    /* 🚨 將 hidden 改為 auto。如果圖表太寬，允許水平滑動查看而不會破圖 */
+    overflow-x: auto; 
+    overflow-y: hidden;
 }
 
 .text_block {
@@ -160,8 +166,9 @@ header {
     width: 100% !important;
 }
 
+/* 確保 Vega 響應式不會過度擠壓 */
 canvas {
-    max-width: 100% !important;
+    max-width: none !important; /* 🚨 取消 100% 限制，避免畫面與文字被強制擠扁變形 */
 }
 
 /* =========================================

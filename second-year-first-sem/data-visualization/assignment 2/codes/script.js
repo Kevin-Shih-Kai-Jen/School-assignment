@@ -10,7 +10,7 @@ const vegaTheme = {
         color: "#ffae00",
         anchor: "start",
         offset: 20
-    },
+},
     axis: {
         labelFont: "Inter",
         titleFont: "Rajdhani",
@@ -53,7 +53,7 @@ const vegaTheme = {
         filled: true,
         size: 80
     }
-};
+}; 
 
 for (let i = 1; i <= GRAPH_AMOUNT; i++) {
     const id = `#graph_${i}`;
@@ -66,8 +66,7 @@ for (let i = 1; i <= GRAPH_AMOUNT; i++) {
     
     vegaEmbed(id, data_path, { 
         config: vegaTheme,
-        actions: false,
-        width: "container" // Ensure responsive container width
+        actions: false
     })
     .then(result => {
         console.log(`Loaded Graph ${i}`);

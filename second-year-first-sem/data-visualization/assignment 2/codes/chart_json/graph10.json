@@ -1,6 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Comparison of matches played and performance against Top 20 teams between Europe and Australian regions",
+  "width": "container",
   "data": {
     "url": "../data/graph_10/data.csv",
     "format": {
@@ -28,7 +29,6 @@
   },
   "vconcat": [
     {
-      "width": "container",
       "height": 180,
       "title": {
         "text": "The Physical Isolation Gap",
@@ -79,7 +79,6 @@
       }
     },
     {
-      "width": "container",
       "height": 220,
       "title": {
         "text": "The Strategic Collapse",
