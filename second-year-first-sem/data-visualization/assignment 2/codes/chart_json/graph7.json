@@ -5,6 +5,8 @@
     "subtitle": "EU teams leverage utility damage and flash assists far more effectively than OCE teams.",
     "subtitleColor": "#94a3b8"
   },
+  "width": "container",
+  "autosize": {"type": "fit", "contains": "padding"},
   "data": {
     "url": "../data/graph_7/data.csv"
   },
@@ -22,21 +24,23 @@
     }
   ],
   "facet": {
-    "column": {
+    "row": {
       "field": "Region_Group",
       "type": "nominal",
       "title": null,
       "header": {
         "labelColor": "#ffae00",
         "labelFont": "Rajdhani",
-        "labelFontSize": 20,
-        "labelPadding": 10
+        "labelFontSize": 22,
+        "labelPadding": 10,
+        "labelOrient": "top",
+        "labelAnchor": "start"
       }
     }
   },
   "spec": {
-    "width": 350,
-    "height": 400,
+    "width": "container",
+    "height": 280,
     "encoding": {
       "y": {
         "field": "Team",
@@ -53,7 +57,7 @@
       {
         "mark": {"type": "rule", "color": "rgba(255, 255, 255, 0.2)", "strokeWidth": 1.5},
         "encoding": {
-          "x": {"field": "UD", "type": "quantitative", "title": "Tactical Score"},
+          "x": {"field": "UD", "type": "quantitative", "title": "Tactical Score (UD & Scaled Flash Assists)"},
           "x2": {"field": "Flash_Assists_Scaled"}
         }
       },
