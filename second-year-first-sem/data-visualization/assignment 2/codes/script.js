@@ -1,4 +1,4 @@
-const GRAPH_AMOUNT = 10; 
+const GRAPH_AMOUNT = 11; 
 
 // Define a global theme for Vega-Lite that matches the CSS 
 const vegaTheme = {     
@@ -67,8 +67,8 @@ for (let i = 1; i <= GRAPH_AMOUNT; i++) {
         actions: false
     };
 
-    // 💡 關鍵修復：除了圖 7 和 8 不能使用 container 之外，其餘圖表強制填滿寬度！
-    if (i !== 7 && i !== 8) {
+    // 💡 關鍵修復：除了圖 7, 8, 11 不能使用 container 之外，其餘圖表強制填滿寬度！
+    if (i !== 7 && i !== 8 && i !== 11) {
         opt.width = "container";
     }
 
