@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A donut chart comparing weapon usage between EU and OCE regions.",
+  "title": {
+    "text": "Weapon Specialization: OCE vs. EU",
+    "subtitle": "Distribution of primary rifles and sniper rifles across professional tiers.",
+    "subtitleColor": "#94a3b8",
+    "anchor": "start",
+    "offset": 20
+  },
+  "data": {
+    "values": [
+      {"Region": "Europe", "Weapon": "AK-47", "Usage": 45},
+      {"Region": "Europe", "Weapon": "M4A1-S", "Usage": 35},
+      {"Region": "Europe", "Weapon": "AWP", "Usage": 20},
+      {"Region": "Oceania", "Weapon": "AK-47", "Usage": 50},
+      {"Region": "Oceania", "Weapon": "M4A1-S", "Usage": 32},
+      {"Region": "Oceania", "Usage": 18, "Weapon": "AWP"}
+    ]
+  },
+  "spacing": 20,
+  "facet": {
+    "column": {
+      "field": "Region",
+      "type": "nominal",
+      "title": null,
+      "header": {
+        "labelColor": "#ffae00",
+        "labelFont": "Rajdhani",
+        "labelFontSize": 18,
+        "labelPadding": 10
+      }
+    }
+  },
+  "spec": {
+    "width": 200,
+    "height": 200,
+    "layer": [
+      {
+        "mark": {"type": "arc", "innerRadius": 60, "outerRadius": 90, "stroke": "#0b0e14", "strokeWidth": 2},
+        "encoding": {
+          "theta": {"field": "Usage", "type": "quantitative", "stack": true},
+          "color": {
+            "field": "Weapon",
+            "type": "nominal",
+            "scale": {
+              "domain": ["AK-47", "M4A1-S", "AWP"],
+              "range": ["#ffae00", "#00bfff", "#f87171"]
+            },
+            "legend": {"orient": "bottom", "title": null}
+          },
+          "tooltip": [
+            {"field": "Region", "type": "nominal"},
+            {"field": "Weapon", "type": "nominal"},
+            {"field": "Usage", "type": "quantitative", "title": "Usage (%)"}
+          ]
+        }
+      },
+      {
+        "mark": {"type": "text", "radius": 110, "fontSize": 12, "fill": "#94a3b8", "font": "Inter"},
+        "encoding": {
+          "theta": {"field": "Usage", "type": "quantitative", "stack": true},
+          "text": {"field": "Usage", "type": "quantitative", "format": ".0f"},
+          "opacity": {
+            "condition": {"test": "datum.Usage > 5", "value": 1},
+            "value": 0
+          }
+        }
+      }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": {"stroke": "transparent"}
+  }
+}

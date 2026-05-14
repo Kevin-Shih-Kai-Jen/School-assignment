@@ -1,0 +1,249 @@
+/* 引入 Google Fonts: Rajdhani (電競風格), Inter (現代感), Roboto Mono (數據感) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
+
+/* 定義進階色彩與變數 - Esports Dark Mode */
+:root {
+    --bg-dark: #0b0e14;        /* 深色背景 */
+    --bg-card: rgba(255, 255, 255, 0.03); /* 透明卡片背景 */
+    --text-primary: #f1f5f9;   /* 主文字 */
+    --text-secondary: #94a3b8; /* 次要文字 */
+    --accent-gold: #ffae00;    /* CS2 高光金 */
+    --accent-blue: #00bfff;    /* CS2 點綴藍 */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --glass-blur: blur(12px);
+    --max-width: 1200px;
+}
+
+/* =========================================
+   全域基礎設定 (Global Foundations)
+   ========================================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: radial-gradient(circle at 50% 0%, #1a1f2e 0%, #0b0e14 100%);
+    background-attachment: fixed;
+}
+
+header, main, footer {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* =========================================
+   進階字體排印 (Typography)
+   ========================================= */
+h1, h2, h3, .header {
+    font-family: 'Rajdhani', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+h1 span {
+    color: var(--accent-gold);
+}
+
+h3.header {
+    font-size: 1.6rem;
+    color: var(--accent-gold);
+    border-bottom: 2px solid var(--accent-gold);
+    display: inline-block;
+    padding-bottom: 0.2rem;
+    margin-bottom: 3rem;
+    margin-top: 10rem;
+}
+
+/* =========================================
+   視覺層次 (Visual Hierarchy & Layout)
+   ========================================= */
+header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 4rem 0;
+}
+
+#student_details {
+    position: absolute;
+    top: 2rem;
+    left: 1.5rem;
+    text-align: left;
+}
+
+#student_details p {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8rem;
+    margin: 0;
+    color: var(--accent-blue);
+}
+
+#introduction_div {
+    max-width: 900px;
+}
+
+#introduction_div p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+/* Scrollytelling 容器強化 */
+.chart-container {
+    display: flex;
+    flex-wrap: wrap; /* 應對窄螢幕 */
+    align-items: flex-start;
+    gap: 3rem;
+    margin-bottom: 8rem;
+    padding: 3.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    backdrop-filter: var(--glass-blur);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.chart-container:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.graph {
+    flex: 1.8; 
+    min-width: 300px;
+    width: 100%;
+    
+    /* 🚨 加上最小高度，確保在圖表運算前 flex 容器不會塌陷 */
+    min-height: 400px; 
+    
+    /* 🚨 將 hidden 改為 auto。如果圖表太寬，允許水平滑動查看而不會破圖 */
+    overflow-x: auto; 
+    overflow-y: hidden;
+}
+
+.text_block {
+    flex: 1; /* 文字佔比 */
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text_block p {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.text_block strong {
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+/* Vega Embed 強制 100% 寬度 */
+.vega-embed {
+    width: 100% !important;
+}
+
+/* 確保 Vega 響應式不會過度擠壓 */
+canvas {
+    max-width: none !important; /* 🚨 取消 100% 限制，避免畫面與文字被強制擠扁變形 */
+}
+
+/* =========================================
+   頁尾 (Footer)
+   ========================================= */
+footer {
+    padding: 8rem 1.5rem 6rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 8rem;
+}
+
+#conclusion {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 5rem;
+}
+
+#conclusion p {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+#acknowledgement {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 3rem;
+}
+
+#acknowledgement p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* =========================================
+   響應式設計 (Responsive Design)
+   ========================================= */
+@media (max-width: 1024px) {
+    .chart-container {
+        padding: 2.5rem;
+        gap: 2rem;
+    }
+    
+    .graph, .text_block {
+        flex: 1 1 100%; /* 垂直排列 */
+    }
+}
+
+/* 自定義 Vega Tooltip 樣式 */
+#vg-tooltip-element {
+    background: #1a1f2e !important;
+    color: #f1f5f9 !important;
+    border: 1px solid var(--accent-gold) !important;
+    font-family: 'Inter', sans-serif !important;
+    border-radius: 8px !important;
+}
+
+/* =========================================
+   修正 Footer 與最後一張圖表的留白 (Fix Spacing Gap)
+========================================= */
+
+/* 🌟 1. 消除最後一張圖表下方自帶的 8rem 巨大推擠 */
+.chart-container:last-of-type {
+    margin-bottom: 2rem;
+}
+
+/* 🌟 2. 大幅縮小 footer 的上下間距 (原本上方 padding/margin 各高達 8rem) */
+footer {
+    padding-top: 4rem !important;   
+    margin-top: 2rem !important;    
+}
+
+/* 🌟 3. 專門針對 footer 內的標題，消除其高達 10rem 的預設頂部間距 */
+footer h3.header {
+    margin-top: 1rem;
+}

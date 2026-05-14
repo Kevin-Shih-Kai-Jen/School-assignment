@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 500,
+  "title": {
+    "text": "The Mechanical Skill Map",
+    "subtitle": "Bubble size: Player count | Color: Avg Headshot %",
+    "subtitleColor": "#94a3b8"
+  },
+  "projection": {
+    "type": "naturalEarth1"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/world-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#1a1f2e",
+        "stroke": "#888",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "../data/graph_6/data.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "#f1f5f9",
+        "strokeWidth": 1,
+        "tooltip": true
+      },
+      "encoding": {
+        "longitude": {"field": "Longitude", "type": "quantitative"},
+        "latitude": {"field": "Latitude", "type": "quantitative"},
+        "size": {
+          "field": "Player_Count",
+          "type": "quantitative",
+          "title": "Pro Players",
+          "scale": {"range": [50, 1000]}
+        },
+        "color": {
+          "field": "Average_HS",
+          "type": "quantitative",
+          "title": "Avg HS%",
+          "scale": {"scheme": "magma"}
+        },
+        "tooltip": [
+          {"field": "country", "type": "nominal", "title": "Country"},
+          {"field": "Player_Count", "type": "quantitative", "title": "Pro Players"},
+          {"field": "Average_HS", "type": "quantitative", "title": "Avg HS %"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "color": "#00bfff",
+        "fontWeight": "bold",
+        "font": "Rajdhani",
+        "dy": -20
+      },
+      "encoding": {
+        "longitude": {"datum": 133},
+        "latitude": {"datum": -25},
+        "text": {"value": "OCE: High Aim, Low Infrastructure"}
+      }
+    }
+  ]
+}

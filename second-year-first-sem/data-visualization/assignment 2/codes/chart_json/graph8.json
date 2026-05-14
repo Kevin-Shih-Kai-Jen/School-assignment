@@ -1,0 +1,78 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "The Map Pool Chasm",
+    "subtitle": "EU teams possess deep map pools (80%+ win rates across 6+ maps), whereas OCE teams are often limited to 1-2 'specialty' maps.",
+    "subtitleColor": "#94a3b8"
+  },
+  "data": {
+    "url": "../data/graph_8/data.csv"
+  },
+  "transform": [
+    {
+      "fold": ["Dust2", "Mirage", "Inferno", "Nuke", "Overpass", "Ancient", "Anubis"],
+      "as": ["Map", "WinRateString"]
+    },
+    {
+      "calculate": "datum.WinRateString === 'N/A' ? null : toNumber(replace(datum.WinRateString, '%', ''))",
+      "as": "WinRate"
+    },
+    {
+      "calculate": "datum.Team === 'FlyQuest' || datum.Team === 'Rooster' ? 'Oceania' : (datum.Team === 'FURIA' ? 'Americas' : (datum.Team === 'The MongolZ' ? 'Asia' : 'Europe'))",
+      "as": "Region"
+    }
+  ],
+  "facet": {
+    "row": {
+      "field": "Region",
+      "type": "nominal",
+      "title": null,
+      "header": {"labelColor": "#ffae00", "labelFont": "Rajdhani", "labelFontSize": 14},
+      "sort": ["Europe", "Americas", "Asia", "Oceania"]
+    }
+  },
+  "spec": {
+    "width": 400,
+    "height": 120,
+    "layer": [
+      {
+        "mark": {
+          "type": "rect", 
+          "tooltip": true, 
+          "cornerRadius": 6, 
+          "stroke": "#0b0e14", 
+          "strokeWidth": 2
+        },
+        "encoding": {
+          "x": {"field": "Map", "type": "nominal", "axis": {"labelAngle": 0}},
+          "y": {"field": "Team", "type": "nominal", "title": null},
+          "color": {
+            "field": "WinRate",
+            "type": "quantitative",
+            "scale": {"scheme": "magma", "domain": [0, 100]},
+            "legend": {"title": "Win %"}
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "text", 
+          "baseline": "middle", 
+          "fontSize": 11, 
+          "fontWeight": "bold", 
+          "font": "Roboto Mono"
+        },
+        "encoding": {
+          "x": {"field": "Map", "type": "nominal"},
+          "y": {"field": "Team", "type": "nominal"},
+          "text": {"field": "WinRate", "type": "quantitative", "format": ".0f"},
+          "color": {
+            "condition": {"test": "datum.WinRate > 60", "value": "black"},
+            "value": "white"
+          }
+        }
+      }
+    ]
+  },
+  "resolve": {"scale": {"y": "independent"}}
+}

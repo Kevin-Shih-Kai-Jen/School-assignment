@@ -1,0 +1,95 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "The Tactical Efficiency Gap",
+    "subtitle": "EU teams leverage utility damage and flash assists far more effectively than OCE teams.",
+    "subtitleColor": "#94a3b8"
+  },
+  "width": "container",
+  "autosize": {"type": "fit", "contains": "padding"},
+  "data": {
+    "url": "../data/graph_7/data.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.Flash_Assists * 100",
+      "as": "Flash_Assists_Scaled"
+    },
+    {
+      "calculate": "test(/EU|Europe/i, datum.Region) ? 'Europe' : (test(/AU|OCE|Australia/i, datum.Region) ? 'Australia' : 'Other')",
+      "as": "Region_Group"
+    },
+    {
+      "filter": "datum.Region_Group != 'Other'"
+    }
+  ],
+  "facet": {
+    "row": {
+      "field": "Region_Group",
+      "type": "nominal",
+      "title": null,
+      "header": {
+        "labelColor": "#ffae00",
+        "labelFont": "Rajdhani",
+        "labelFontSize": 22,
+        "labelPadding": 10,
+        "labelOrient": "top",
+        "labelAnchor": "start"
+      }
+    }
+  },
+  "spec": {
+    "width": "container",
+    "height": 280,
+    "encoding": {
+      "y": {
+        "field": "Team",
+        "type": "nominal",
+        "sort": {"field": "UD", "order": "descending"},
+        "title": null,
+        "axis": {
+          "labelFontSize": 12,
+          "labelLimit": 150
+        }
+      }
+    },
+    "layer": [
+      {
+        "mark": {"type": "rule", "color": "rgba(255, 255, 255, 0.2)", "strokeWidth": 1.5},
+        "encoding": {
+          "x": {"field": "UD", "type": "quantitative", "title": "Tactical Score (UD & Scaled Flash Assists)"},
+          "x2": {"field": "Flash_Assists_Scaled"}
+        }
+      },
+      {
+        "mark": {"type": "point", "filled": true, "size": 150},
+        "encoding": {
+          "x": {"field": "UD", "type": "quantitative"},
+          "color": {
+            "datum": "Utility Damage (UD)",
+            "scale": {
+              "domain": ["Utility Damage (UD)", "Flash Assists (Scaled)"],
+              "range": ["#ffae00", "#00bfff"]
+            },
+            "legend": {"orient": "bottom", "title": null}
+          },
+          "tooltip": [
+            {"field": "Team", "type": "nominal"},
+            {"field": "UD", "type": "quantitative", "title": "UD"}
+          ]
+        }
+      },
+      {
+        "mark": {"type": "point", "filled": false, "strokeWidth": 2, "size": 150},
+        "encoding": {
+          "x": {"field": "Flash_Assists_Scaled", "type": "quantitative"},
+          "color": {"datum": "Flash Assists (Scaled)"},
+          "tooltip": [
+            {"field": "Team", "type": "nominal"},
+            {"field": "Flash_Assists", "type": "quantitative", "title": "Flash Assists"}
+          ]
+        }
+      }
+    ]
+  }
+}

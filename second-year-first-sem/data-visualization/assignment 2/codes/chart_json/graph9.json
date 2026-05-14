@@ -1,0 +1,108 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "By analyzing real player data from Kaggle (as seen in Chart 9), we can observe that the golden age for global professional players falls between 24 and 26, with over 10% of players remaining active in top-tier tournaments even after age 30 (such as the legendary Danish IGL, karrigan). However, due to the lack of a comprehensive tier-2 league system and stable salary guarantees in the Oceania region, many young players are forced to retire in their early 20s to seek traditional jobs, long before reaching their mechanical peak. This 'gap in age and experience' is another hidden reason why Oceania struggles to cultivate world-class teams.",
+  "width": "container",
+  "height": 400,
+  "padding": 20,
+  "data": {
+    "url": "../data/graph_9/age_distribution.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "age",
+      "type": "quantitative",
+      "title": "Age",
+      "axis": {
+        "tickMinStep": 1,
+        "grid": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "line": {
+          "color": "#ffae00",
+          "size": 3
+        },
+        "color": {
+          "x1": 1,
+          "y1": 1,
+          "x2": 1,
+          "y2": 0,
+          "gradient": "linear",
+          "stops": [
+            {"offset": 0, "color": "rgba(255, 174, 0, 0.1)"},
+            {"offset": 1, "color": "rgba(255, 174, 0, 0.6)"}
+          ]
+        },
+        "opacity": 0.8,
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "y": {
+          "field": "Percentage",
+          "type": "quantitative",
+          "title": "Player Percentage (%)",
+          "axis": {
+            "grid": true,
+            "gridColor": "rgba(255, 255, 255, 0.1)",
+            "gridDash": [4, 4]
+          }
+        }
+      }
+    },
+    {
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": ["age"],
+            "on": "pointerover",
+            "nearest": true,
+            "clear": "pointerout"
+          }
+        }
+      ],
+      "mark": {"type": "point", "opacity": 0},
+      "encoding": {
+        "y": {"field": "Percentage", "type": "quantitative"}
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "#f1f5f9", "strokeDash": [4, 2], "size": 1},
+      "encoding": {
+        "opacity": {
+          "condition": {"param": "hover", "empty": false, "value": 1},
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "age", "type": "quantitative", "title": "Age"},
+          {"field": "Percentage", "type": "quantitative", "title": "Percentage (%)"},
+          {"field": "Player_Count", "type": "quantitative", "title": "Player Count"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 100,
+        "color": "#00bfff",
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "y": {"field": "Percentage", "type": "quantitative"},
+        "opacity": {
+          "condition": {"param": "hover", "empty": false, "value": 1},
+          "value": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 4: Nationality Breakdown of Top 30 Team Players (Waffle Chart)",
+  "title": {
+    "text": "The 1% Problem: Pro Player Origins",
+    "subtitle": "Nationality breakdown of players in Top 30 global teams",
+    "subtitleColor": "#94a3b8"
+  },
+  "width": "container",
+  "height": 400,
+  "data": {
+    "url": "../data/graph_4/graph_4.csv"
+  },
+  "transform": [
+    {
+      "window": [{"op": "row_number", "as": "id"}]
+    },
+    {
+      "calculate": "ceil(datum.id / 10)",
+      "as": "row"
+    },
+    {
+      "calculate": "datum.id % 10 == 0 ? 10 : datum.id % 10",
+      "as": "col"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#0b0e14",
+        "strokeWidth": 2,
+        "tooltip": true,
+        "cornerRadius": 4
+      },
+      "encoding": {
+        "x": {"field": "col", "type": "ordinal", "axis": null},
+        "y": {"field": "row", "type": "ordinal", "axis": null, "sort": "descending"},
+        "color": {
+          "field": "Region",
+          "type": "nominal",
+          "scale": {
+            "domain": ["OCE", "Asia", "CIS", "EU", "SA"],
+            "range": ["#ffae00", "#1e293b", "#334155", "#00bfff", "#475569"]
+          },
+          "legend": {"title": "Region", "orient": "right"}
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "color": "#ffae00",
+        "fontWeight": "bold",
+        "fontSize": 14,
+        "font": "Rajdhani",
+        "align": "left",
+        "baseline": "bottom"
+      },
+      "data": {"values": [{"text": "Oceania: Marginal Representation"}]},
+      "encoding": {
+        "text": {"field": "text"}
+      }
+    }
+  ]
+}
